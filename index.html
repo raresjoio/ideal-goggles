@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clopoțel — Școala Gimnazială Regina Maria</title>
+<link rel="icon" href="scoala-logo.png">
+<style>
+  :root{
+    --bg:#eef2f0;
+    --card:#ffffff;
+    --line:#dbe6e2;
+    --txt:#142826;
+    --muted:#5f7a75;
+    --teal:#0e6e66;
+    --teal-deep:#083f3a;
+    --teal-ink:#062521;
+    --gold:#c9a227;
+    --gold-deep:#8a6f14;
+    --gold-soft:#f7ecc8;
+    --green:#15803d;
+    --green-bright:#16a34a;
+    --danger:#b91c1c;
+    --serif:Georgia,'Palatino Linotype','Times New Roman',serif;
+    --radius:18px;
+    --shadow:0 1px 2px rgba(6,37,33,.07),0 16px 38px -22px rgba(6,37,33,.35);
+    --shadow-sm:0 1px 2px rgba(6,37,33,.08),0 6px 16px -8px rgba(6,37,33,.22);
+  }
+  *{box-sizing:border-box}
+  ::selection{background:var(--gold);color:#fff}
+  :focus-visible{outline:3px solid rgba(201,162,39,.6);outline-offset:2px}
+  body{
+    margin:0;font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Roboto,Arial,sans-serif;
+    color:var(--txt);background:var(--bg);min-height:100vh;
+    background-image:
+      radial-gradient(900px 480px at 8% -60px,rgba(14,110,102,.10),transparent 60%),
+      radial-gradient(800px 420px at 105% 40px,rgba(201,162,39,.12),transparent 60%),
+      repeating-linear-gradient(45deg,rgba(6,37,33,.014) 0 2px,transparent 2px 8px);
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  body::before{content:"";display:block;height:6px;
+    background:linear-gradient(90deg,var(--gold-deep),var(--gold) 25%,#f5dd8d 50%,var(--gold) 75%,var(--gold-deep));
+    box-shadow:0 1px 4px rgba(0,0,0,.3)}
+  .wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:24px 18px 70px}
+
+  /* Antet scoala */
+  .school{
+    background:
+      radial-gradient(560px 260px at 92% -60px,rgba(201,162,39,.30),transparent 65%),
+      radial-gradient(500px 300px at -40px 120%,rgba(255,255,255,.06),transparent 60%),
+      linear-gradient(115deg,var(--teal-ink) 0%,#0a3a35 52%,#0d5a51 100%);
+    border:1px solid rgba(201,162,39,.45);border-bottom:3px solid var(--gold);border-radius:22px;
+    padding:20px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+    box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .school::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(420px 200px at 88% -40px,rgba(201,162,39,.22),transparent 70%);}
+  .school img.logo{width:92px;height:92px;object-fit:contain;border-radius:50%;background:#fffdf4;
+    border:3px solid var(--gold);outline:2px solid rgba(201,162,39,.4);outline-offset:3px;flex:none;
+    box-shadow:0 10px 24px -8px rgba(0,0,0,.65);position:relative;z-index:1}
+  .school h1{font-family:var(--serif);font-size:clamp(21px,3.4vw,31px);margin:0;line-height:1.1;color:#fffdf2;
+    text-transform:uppercase;letter-spacing:1.2px;position:relative;z-index:1;font-weight:700;
+    text-shadow:0 2px 6px rgba(0,0,0,.45)}
+  .school p{margin:7px 0 0;color:#e9d9a0;font-size:13.5px;letter-spacing:2.6px;text-transform:uppercase;
+    position:relative;z-index:1;display:flex;align-items:center;gap:10px}
+  .school p::before,.school p::after{content:"";display:inline-block;width:30px;height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold));border-radius:2px}
+  .school p::after{background:linear-gradient(90deg,var(--gold),transparent)}
+  .pill{
+    margin-left:auto;display:inline-flex;align-items:center;gap:9px;position:relative;z-index:1;
+    padding:10px 18px;border-radius:999px;font-size:14px;font-weight:800;letter-spacing:.4px;
+    background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.35);color:#e8f3f1;
+  }
+  .pill i{width:11px;height:11px;border-radius:50%;background:#9fb3b0;display:block}
+  .pill.on{color:#d9fbe4;border-color:var(--green-bright);background:rgba(22,163,74,.22)}
+  .pill.on i{background:#4ade80;animation:dot 1.6s infinite}
+  @keyframes dot{70%{box-shadow:0 0 0 9px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+  .userchip{position:relative;z-index:1;color:var(--gold-soft);font-weight:800;font-size:14px;white-space:nowrap}
+  .school .btn.lout{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4);color:#fff;
+    position:relative;z-index:1}
+  .school .btn.lout:hover{border-color:#fff}
+
+  /* Pasi */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 18px}
+  @media(max-width:700px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--gold);
+    border-radius:14px;padding:13px 15px;display:flex;gap:13px;align-items:center;
+    box-shadow:var(--shadow-sm);transition:transform .15s,box-shadow .15s}
+  .step:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .step b.num{font-family:var(--serif);background:linear-gradient(160deg,#0d5a51,var(--teal-ink));
+    color:var(--gold-soft);width:40px;height:40px;border:1px solid var(--gold);
+    border-radius:50%;display:grid;place-items:center;font-size:20px;flex:none;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+  .step p{margin:0;font-size:13.5px;line-height:1.45;color:var(--muted)}
+  .step p b{display:block;font-size:14.5px;color:var(--txt);letter-spacing:.2px}
+
+  .grid{display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);gap:18px;align-items:start}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;
+    padding:24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;top:0;left:24px;right:24px;height:3px;border-radius:0 0 4px 4px;
+    background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold) 80%,transparent)}
+  .card h2{font-size:12.5px;text-transform:uppercase;letter-spacing:2px;color:var(--teal-deep);
+    margin:2px 0 14px;display:flex;align-items:center;gap:10px;font-weight:800}
+  .card h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#d9c57c,transparent)}
+
+  .clock{font-size:clamp(58px,11vw,106px);font-weight:800;line-height:1;letter-spacing:-2px;
+    text-align:center;font-variant-numeric:tabular-nums;color:var(--teal-ink);
+    text-shadow:0 2px 0 rgba(255,255,255,.9),0 14px 30px -18px rgba(6,37,33,.5)}
+  .clock small{font-size:.3em;color:var(--muted);font-weight:700}
+  .date{text-align:center;color:var(--muted);font-size:13.5px;margin-top:8px;text-transform:uppercase;
+    letter-spacing:2.4px;font-weight:700}
+  .next{margin-top:16px;border:1px solid #e2d3a0;border-top:3px solid var(--gold);
+    padding:14px 12px 16px;text-align:center;background:linear-gradient(180deg,#fffdf4,#f6f4e8);
+    border-radius:14px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.7)}
+  .next .lbl{color:#8a6f14;font-size:11.5px;text-transform:uppercase;letter-spacing:2px;font-weight:800}
+  .next .val{font-size:clamp(32px,6vw,48px);font-weight:800;font-variant-numeric:tabular-nums;color:var(--teal-deep)}
+  .next .info{color:var(--txt);font-size:16px;margin-top:6px;font-weight:700;min-height:22px}
+  .next .last{color:var(--muted);font-size:13.5px;margin-top:6px;min-height:18px}
+  .next .last b{color:var(--green-bright)}
+  .runwarn{margin-top:12px;background:#fef3c7;border:1.5px solid #d9a821;border-radius:13px;
+    padding:11px 14px;color:#6b4a08;font-size:14.5px;line-height:1.5;text-align:center}
+  .runwarn.hide{display:none}
+
+  .btn{appearance:none;border:1px solid #c3d2ce;background:linear-gradient(180deg,#ffffff,#edf3f1);
+    color:var(--txt);padding:12px 18px;border-radius:13px;font-size:15px;font-weight:700;cursor:pointer;
+    transition:transform .12s,box-shadow .12s,border-color .12s,filter .12s;font-family:inherit;
+    box-shadow:0 1px 2px rgba(6,37,33,.1)}
+  .btn:hover{border-color:var(--teal);transform:translateY(-1px);box-shadow:var(--shadow-sm);filter:brightness(1.02)}
+  .btn:active{transform:translateY(0)}
+  .btn.big{width:100%;padding:18px;font-size:20px;border-radius:15px;margin-top:16px;letter-spacing:1px}
+  .btn.go{background:linear-gradient(180deg,#1fae57,#12713a 60%,#0e5c30);border-color:#0a4a26;color:#fff;
+    box-shadow:0 16px 28px -14px rgba(14,92,48,.85),inset 0 1px 0 rgba(255,255,255,.4);text-shadow:0 1px 2px rgba(0,0,0,.3)}
+  .btn.stop{background:linear-gradient(180deg,#d64545,#a11f1f 60%,#861818);border-color:#6d1010;color:#fff;
+    box-shadow:0 16px 28px -14px rgba(161,31,31,.85),inset 0 1px 0 rgba(255,255,255,.35);text-shadow:0 1px 2px rgba(0,0,0,.3)}
+  .btn.ghost{background:linear-gradient(180deg,#ffffff,#f2f6f4)}
+  .btn.gold{background:linear-gradient(180deg,#dcb93f,#a8841a 60%,#8a6c14);border-color:#6d5410;color:#fff;
+    box-shadow:0 14px 26px -14px rgba(138,108,20,.9),inset 0 1px 0 rgba(255,255,255,.45);text-shadow:0 1px 2px rgba(0,0,0,.3)}
+  .btn.sm{padding:9px 13px;font-size:14px;border-radius:11px}
+  .rowbtns{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .rowbtns .btn{flex:1;min-width:140px}
+
+  label.flabel{font-size:12px;color:var(--teal-deep);font-weight:800;text-transform:uppercase;letter-spacing:1.1px}
+  select,input[type=text],input[type=time],input[type=number]{
+    background:linear-gradient(180deg,#ffffff,#fbfdfc);border:1.5px solid #c9d6d2;color:var(--txt);
+    border-radius:11px;padding:11px 12px;font-size:16px;font-family:inherit;outline:none;width:100%;
+    transition:border-color .12s,box-shadow .12s;
+  }
+  select:focus,input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,110,102,.16)}
+  input[type=time]{font-weight:800;font-variant-numeric:tabular-nums}
+  input[type=range]{flex:1;min-width:130px;accent-color:var(--teal);height:28px}
+
+  .volrow{display:flex;align-items:center;gap:12px;margin-top:12px;background:linear-gradient(180deg,#fbfdfc,#f0f5f3);
+    border:1px solid var(--line);border-radius:14px;padding:10px 14px;box-shadow:inset 0 1px 0 #fff}
+  .volrow span{font-weight:800;font-variant-numeric:tabular-nums;min-width:48px;text-align:right}
+
+  .switch{position:relative;display:inline-block;width:50px;height:28px;flex:none}
+  .switch input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+  .switch span{position:absolute;inset:0;background:#94a3b8;border-radius:999px;transition:.2s;pointer-events:none}
+  .switch span::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s}
+  .switch input:checked + span{background:var(--green-bright)}
+  .switch input:checked + span::after{transform:translateX(22px)}
+
+  details.adv{margin-top:14px;border:1.5px dashed #c9bfa0;border-radius:14px;padding:12px 14px;
+    background:linear-gradient(180deg,#fffdf4,#fbfdfc)}
+  details.adv summary{cursor:pointer;font-weight:800;color:var(--teal-deep);font-size:15px}
+  details.adv summary:hover{color:var(--teal)}
+  .gen{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:12px}
+  .gen label{display:flex;flex-direction:column;gap:6px}
+  .hint{color:var(--muted);font-size:13px;line-height:1.65;margin-top:12px}
+  .hint b{color:var(--txt)}
+  .sep{height:1px;background:linear-gradient(90deg,transparent,#d9c57c,transparent);margin:20px 0}
+
+  .tribute{margin-top:18px;display:flex;gap:18px;align-items:center;background:linear-gradient(120deg,#fffdf4,#ffffff 60%);
+    border:1px solid #e5d9ac;border-top:3px solid var(--gold);border-radius:20px;padding:16px 20px;
+    box-shadow:var(--shadow)}
+  .tribute img{width:88px;height:112px;object-fit:cover;object-position:top;border-radius:12px;
+    border:2px solid var(--gold);outline:1px solid #e5d9ac;outline-offset:2px;flex:none;
+    box-shadow:0 10px 20px -10px rgba(0,0,0,.5)}
+  .tribute p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+  .tribute p b{font-family:var(--serif);color:var(--teal-deep);font-size:17px;letter-spacing:.3px}
+
+  /* Faza live: ora / pauza + bara progres */
+  .phase{margin-top:14px;background:
+      radial-gradient(300px 120px at 50% -40px,rgba(201,162,39,.25),transparent 70%),
+      linear-gradient(135deg,#07332e,var(--teal) 130%);
+    color:#fff;border:1px solid rgba(201,162,39,.5);border-radius:15px;padding:16px;text-align:center;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 12px 26px -14px rgba(7,51,46,.75)}
+  .phase .pname{font-size:20px;font-weight:800;letter-spacing:.3px;text-shadow:0 1px 3px rgba(0,0,0,.35)}
+  .phase .psub{font-size:13.5px;opacity:.94;margin-top:5px}
+  .phase .bar{height:11px;background:rgba(255,255,255,.22);border-radius:999px;margin-top:11px;overflow:hidden;
+    box-shadow:inset 0 1px 3px rgba(0,0,0,.3)}
+  .phase .bar div{height:100%;width:0%;background:linear-gradient(90deg,var(--gold-deep),var(--gold) 40%,#f5dd8d);
+    border-radius:999px;transition:width .3s linear;box-shadow:0 0 8px rgba(201,162,39,.8)}
+  .phase.idle{background:#f7faf9;color:var(--txt);border:1.5px dashed var(--line);box-shadow:none}
+  .phase.idle .bar{display:none}
+
+  /* Orar: timeline premium — cate o casuta de pauza sub fiecare ora */
+  #list{position:relative}
+  @media(min-width:641px){
+    #list{padding-left:28px}
+    #list::before{content:"";position:absolute;left:10px;top:22px;bottom:22px;width:2px;border-radius:2px;
+      background:linear-gradient(180deg,var(--gold),var(--teal) 40%,var(--teal) 60%,var(--gold));opacity:.65}
+  }
+  .lesson{background:linear-gradient(180deg,#ffffff,#fbfdfc);border:1px solid var(--line);
+    border-radius:15px;padding:12px 14px 12px 16px;margin-top:10px;position:relative;
+    box-shadow:var(--shadow-sm);transition:transform .14s,box-shadow .14s,border-color .14s}
+  .lesson:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+  .lesson::before{content:"";position:absolute;left:-1px;top:12px;bottom:12px;width:4px;border-radius:4px;
+    background:linear-gradient(180deg,var(--teal),var(--teal-deep));opacity:.9}
+  .lesson.is-next{border-color:#7ecf97;box-shadow:0 0 0 3px rgba(22,163,74,.16),var(--shadow-sm)}
+  .lesson.is-next::before{background:linear-gradient(180deg,#2bbe66,#15803d)}
+  .lesson.is-now{border-color:var(--gold)}
+  .lesson.is-now::before{background:linear-gradient(180deg,#dcb93f,#8a6c14)}
+  .lesson .ntag{display:none;font-size:10.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;
+    color:#0d5c33;background:#dcf5e4;border:1px solid #7ecf97;border-radius:999px;padding:3px 10px}
+  .lesson.is-next .ntag{display:inline-block}
+  @media(min-width:641px){
+    .lesson::after{content:"";position:absolute;left:-25px;top:22px;width:9px;height:9px;border-radius:50%;
+      background:#fff;border:3px solid var(--teal);transition:.15s}
+    .lesson.is-next::after{border-color:var(--green-bright);box-shadow:0 0 0 5px rgba(22,163,74,.16)}
+  }
+  .lesson .lhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-left:6px}
+  .lesson .lnum{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 9px;border-radius:11px;
+    background:linear-gradient(160deg,#0d5a51,var(--teal-ink));color:#f3e3ac;font-weight:800;font-size:16px;
+    border:1px solid rgba(201,162,39,.55);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 4px 10px -5px rgba(8,63,58,.6)}
+  .lesson .lhead b{font-size:16.5px;color:var(--teal-deep);letter-spacing:.4px}
+  .lesson .ldur{font-size:11.5px;font-weight:800;color:#7c5f0e;background:linear-gradient(180deg,#fbf3d9,var(--gold-soft));
+    border:1px solid #ddc682;border-radius:999px;padding:3px 10px;letter-spacing:1px;text-transform:uppercase}
+  .lesson .ltime{font-weight:800;font-variant-numeric:tabular-nums;font-size:16px;color:var(--teal-ink);
+    background:linear-gradient(180deg,#f2f7f6,#e6eeeb);border:1px solid #c9d6d2;border-radius:9px;
+    padding:4px 10px;box-shadow:inset 0 1px 0 #fff}
+  .lesson .lhead input[type=time]{width:118px;font-size:16px;padding:8px}
+  .lesson .lhead .sp{flex:1}
+  .lesson .lhead .ico{border:1px solid #c9d6d2;background:linear-gradient(180deg,#fff,#eef3f1);
+    width:38px;height:38px;border-radius:11px;cursor:pointer;font-size:15px;transition:.12s;
+    box-shadow:0 1px 2px rgba(6,37,33,.12)}
+  .lesson .lhead .ico:hover{border-color:var(--teal);transform:translateY(-1px)}
+  .lesson .lhead .ico.delles:hover{background:linear-gradient(180deg,#d64545,#a11f1f);border-color:#6d1010;color:#fff}
+  .lesson .lbreak{display:flex;align-items:center;gap:8px;margin:10px 0 2px 6px;
+    background:linear-gradient(180deg,#fffdf4,#faf3dd);
+    border:1.5px dashed #cfb45e;border-radius:11px;padding:8px 10px;flex-wrap:wrap}
+  .lesson .lbreak span{font-size:13.5px;font-weight:800;color:#6d5410;letter-spacing:.2px}
+  .lesson .lbreak input{width:64px;text-align:center;font-size:17px;padding:7px 6px}
+  .lesson .lbreak em{font-style:normal;color:var(--muted);font-size:13px;font-weight:600}
+  .extra{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px 10px;margin-top:8px;
+    display:flex;gap:8px;align-items:center}
+  .extra input[type=time]{width:104px}
+  .extra input[type=text]{flex:1;min-width:0}
+  .extra button{border:1.5px solid var(--line);background:#fff;border-radius:10px;width:36px;height:36px;cursor:pointer}
+  .startrow{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:end}
+  .startrow input[type=time]{font-size:22px;padding:12px}
+  .stepbtn{padding:12px 14px;font-size:18px;font-weight:800;min-width:52px}
+  h3.mini{font-size:13px;color:var(--teal);margin:18px 0 4px;text-transform:uppercase;letter-spacing:1.2px}
+
+  .footer{margin:28px 4px 0;text-align:center}
+  .footer .rule{height:2px;border-radius:2px;margin:0 auto 12px;max-width:460px;
+    background:linear-gradient(90deg,transparent,var(--gold) 30%,#f5dd8d 50%,var(--gold) 70%,transparent)}
+  .footer b{display:block;font-family:var(--serif);color:var(--teal-deep);text-transform:uppercase;
+    letter-spacing:2.4px;font-size:14px}
+  .footer span{color:var(--muted);font-size:12.5px;letter-spacing:.4px}
+
+  /* Ecran autentificare */
+  #lock{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:18px;
+    background:linear-gradient(140deg,var(--teal-ink) 0%,var(--teal-deep) 55%,var(--teal) 130%)}
+  #lock::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;
+    background:linear-gradient(90deg,#8a6f14,var(--gold) 30%,#f3d97b 50%,var(--gold) 70%,#8a6f14)}
+  #lock.hide{display:none}
+  .lockcard{position:relative;background:linear-gradient(180deg,#ffffff,#fbfaf2);border-radius:22px;
+    padding:32px 30px 24px;width:100%;max-width:430px;
+    box-shadow:0 40px 90px -30px rgba(0,0,0,.7);text-align:center;
+    border:1px solid rgba(201,162,39,.5);border-top:4px solid var(--gold)}
+  .lockcard img{width:88px;height:88px;object-fit:contain;border-radius:50%;
+    border:3px solid var(--gold);outline:2px solid rgba(201,162,39,.4);outline-offset:3px;background:#fffdf4;
+    box-shadow:0 10px 24px -8px rgba(0,0,0,.5)}
+  .lockcard h2{font-family:var(--serif);margin:14px 0 2px;font-size:20px;text-transform:uppercase;
+    letter-spacing:1px;color:var(--teal-deep)}
+  .lockcard .lsub{margin:0 0 16px;color:var(--muted);font-size:13.5px}
+  .ltabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#eef4f3;border-radius:13px;padding:6px;margin-bottom:16px}
+  .ltabs button{border:0;background:transparent;border-radius:9px;padding:10px;font-size:15px;font-weight:800;
+    color:var(--muted);cursor:pointer;font-family:inherit}
+  .ltabs button.on{background:#fff;color:var(--teal-deep);box-shadow:0 2px 8px -3px rgba(10,46,43,.3)}
+  .lockcard label{display:flex;flex-direction:column;gap:6px;text-align:left;margin-bottom:12px;
+    font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:var(--muted)}
+  .lockcard .btn.big{margin-top:6px;font-size:18px;padding:15px}
+  .lerr{display:none;margin-top:12px;background:#fdecec;border:1.5px solid #e8a0a0;border-radius:11px;
+    padding:9px 12px;color:#7c1616;font-size:14px;font-weight:700}
+  .lerr.show{display:block}
+  .lhint{margin:14px 0 0;color:var(--muted);font-size:12.5px}
+
+  #overlay{position:fixed;inset:0;display:none;place-items:center;z-index:60;
+    background:rgba(6,30,27,.92);backdrop-filter:blur(6px);text-align:center;padding:20px}
+  #overlay.on{display:grid}
+  .ring{border:1px solid rgba(201,162,39,.6);outline:1px solid rgba(201,162,39,.25);outline-offset:6px;
+    border-radius:26px;padding:38px 54px;background:rgba(255,255,255,.045);
+    box-shadow:0 30px 80px -30px rgba(0,0,0,.8);animation:pop .3s ease-out}
+  @keyframes pop{from{transform:scale(.92);opacity:.4}to{transform:scale(1);opacity:1}}
+  .ring .emoji{font-size:clamp(72px,16vw,138px);animation:swing .55s ease-in-out infinite alternate;display:inline-block;transform-origin:50% 10%}
+  @keyframes swing{from{transform:rotate(-15deg)}to{transform:rotate(15deg)}}
+  .ring .ttl{font-size:clamp(34px,7vw,66px);font-weight:800;color:#fff}
+  .ring .sub{color:#fde68a;font-size:clamp(17px,3vw,25px);margin-top:8px;font-weight:700}
+  .ring .schoolname{color:#fff;opacity:.85;margin-top:10px;font-size:14px;text-transform:uppercase;letter-spacing:1px}
+  .ring .stop{margin-top:24px;font-size:20px;padding:16px 30px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="school">
+    <img class="logo" src="scoala-logo.png" alt="Sigla școlii">
+    <div>
+      <h1>Școala Gimnazială Regina Maria</h1>
+      <p>București • Clopoțel școlar automat</p>
+    </div>
+    <div class="pill" id="status"><i></i><span id="statusTxt">Oprit</span></div>
+    <span class="userchip" id="userChip"></span>
+    <button class="btn sm lout" id="logoutBtn" title="Blochează pagina">Ieși</button>
+  </div>
+
+  <div class="steps">
+    <div class="step"><b class="num">1</b><p><b>Verifică orarul</b>Orele sunt mai jos. Dacă sunt bune, nu atingi nimic.</p></div>
+    <div class="step"><b class="num">2</b><p><b>Apasă butonul verde</b>Pornește clopoțelul dimineața, cu un singur click.</p></div>
+    <div class="step"><b class="num">3</b><p><b>Lasă pagina deschisă</b>Sună singur la fiecare oră. Nu închide tab-ul.</p></div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <div class="card">
+        <h2>⏰ Astăzi</h2>
+        <div class="clock" id="clock">--:--<small>:--</small></div>
+        <div class="date" id="date">—</div>
+        <div class="next">
+          <div class="lbl">Următorul clopoțel sună în</div>
+          <div class="val" id="countdown">--:--:--</div>
+          <div class="info" id="nextInfo">—</div>
+          <div class="last" id="lastRing"></div>
+        </div>
+        <div class="phase idle" id="phaseBox">
+          <div class="pname" id="phaseName">—</div>
+          <div class="psub" id="phaseSub"></div>
+          <div class="bar"><div id="phaseBar"></div></div>
+        </div>
+        <button class="btn big go" id="startBtn">▶ PORNEȘTE CLOPOȚELUL</button>
+        <div class="runwarn" id="runWarn">⚠️ E <b>oprit</b> — nu va suna niciun clopoțel.<br>Apasă butonul verde dimineața, după ce verifici orarul.</div>
+        <div class="rowbtns">
+          <button class="btn ghost" id="testBtn">🔊 Testează sunetul</button>
+        </div>
+        <div class="volrow">
+          <label class="flabel" for="vol">Volum</label>
+          <input type="range" id="vol" min="0" max="100" value="80">
+          <span id="volTxt">80%</span>
+        </div>
+      </div>
+
+      <div class="tribute">
+        <img src="regina-maria.png" alt="Regina Maria">
+        <p><b>Regina Maria a României</b><br>
+        Patroana spirituală a școlii noastre. Programul clopoțelului urmează orarul stabilit de conducerea școlii — pauza mică 5 minute, pauza mare 10 minute.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🔔 Orarul clopoțelelor — cu pauza fiecărei ore</h2>
+      <div id="list"></div>
+      <div class="hint">🕗 <b>Doar prima oră se poate muta:</b> schimbi ora din căsuța Orei 1, iar <b>toate celelalte urmează singure</b> după ea. ⏸ Pauza se setează în căsuța de sub fiecare oră.</div>
+
+      <div class="sep"></div>
+      <h2>⚙ Programul zilei — setare ușoară</h2>
+      <div class="gen">
+        <label><span class="flabel">🕗 Prima oră începe la</span>
+          <span class="startrow">
+            <input type="time" id="gStart" value="08:00">
+            <button class="btn ghost stepbtn" id="startMinus" title="Mai devreme cu 5 minute">−</button>
+            <button class="btn ghost stepbtn" id="startPlus" title="Mai târziu cu 5 minute">+</button>
+          </span>
+        </label>
+        <label><span class="flabel">Câte ore sunt azi</span><input type="number" id="gCount" value="7" min="1" max="12"></label>
+        <label><span class="flabel">Cât ține o oră (min)</span><input type="number" id="gDur" value="45" min="20" max="90" step="5"></label>
+      </div>
+
+      <div class="hint" id="durWarn" style="display:none;background:#fef3c7;border:2px solid #f59e0b;border-radius:12px;padding:10px 12px;color:#78350f;font-weight:700"></div>
+      <h3 class="mini">⏸ Pauzele sunt sus, în listă — sub fiecare oră</h3>
+      <div class="hint" style="margin-top:0">Nu mai e o listă separată: fiecare oră are dedesubt căsuța ei de pauză. Pui <b>5</b> la pauza mică, <b>10</b> la pauza mare.</div>
+
+      <div class="rowbtns">
+        <button class="btn gold" id="addHourBtn" style="font-size:17px">＋ Adaugă o oră</button>
+        <button class="btn go" id="genBtn" style="font-size:17px">🔔 Pune orarul în listă</button>
+      </div>
+      <div class="hint">Ai câte ore vrei: apasă <b>＋ Adaugă o oră</b> ca să crească lista, sau <b>✕</b> din dreptul unei ore ca s-o ștergi. Restul orelor se reașază singure.</div>
+      <div class="hint">Exemplu: pui <b>5</b> după Ora 1, <b>10</b> după Ora 2 (pauza mare), restul <b>5</b>. Orarul din listă se face singur: intrare → după 45 min sună de ieșire → după pauză sună de intrare → pornește ora următoare… și tot așa.</div>
+
+      <details class="adv">
+        <summary>Setări avansate (sunet, zile) — apasă aici</summary>
+        <div class="gen">
+          <label><span class="flabel">Ce clopoțele pun</span>
+            <select id="gMode">
+              <option value="full">Intrări + ieșiri</option>
+              <option value="starts">Doar intrări</option>
+            </select>
+          </label>
+          <label><span class="flabel">Sunet</span>
+            <select id="sound">
+              <option value="bell">Clopot (recomandat)</option>
+              <option value="electric">Sonerie electrică</option>
+              <option value="chime">Melodie</option>
+              <option value="custom">Fișier propriu…</option>
+            </select>
+          </label>
+        </div>
+        <div class="gen" id="fileRow" style="display:none">
+          <label><span class="flabel">Fișier audio propriu</span><input type="file" id="file" accept="audio/*"><span id="fileName" class="hint"></span></label>
+        </div>
+        <div class="gen">
+          <label><span class="flabel">Zile de școală</span>
+            <span style="display:flex;align-items:center;gap:10px;font-size:15px;color:var(--txt)">
+              <span class="switch"><input type="checkbox" id="schoolDays" checked><span></span></span> Doar Luni–Vineri
+            </span>
+          </label>
+          <label><span class="flabel">Clopoțel manual în plus (opțional)</span>
+            <span style="display:flex;gap:8px">
+              <input type="time" id="newTime" value="08:00" style="max-width:120px">
+              <input type="text" id="newLabel" placeholder="Nume">
+              <button class="btn sm" id="addBtn" type="button">+ Adaugă</button>
+            </span>
+          </label>
+          <label><span class="flabel">Curățare</span>
+            <span><button class="btn sm ghost" id="clearBtn" type="button">Șterge clopoțelele extra</button></span>
+          </label>
+        </div>
+        <div class="hint"><b>Totul se salvează singur</b> în acest calculator. A doua zi doar apeși butonul verde.</div>
+      </details>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="rule"></div>
+    <b>Școala Gimnazială Regina Maria — București</b>
+    <span>Clopoțel școlar automat • Programul se salvează automat în acest calculator</span>
+  </div>
+</div>
+
+<div id="lock">
+  <div class="lockcard">
+    <img src="scoala-logo.png" alt="Sigla școlii">
+    <h2>Școala Gimnazială Regina Maria</h2>
+    <p class="lsub">Clopoțel școlar automat — zonă protejată</p>
+    <div class="ltabs">
+      <button id="tabLogin" type="button">Autentificare</button>
+      <button id="tabSignup" type="button">Cont nou</button>
+    </div>
+    <div id="paneLogin">
+      <label>Nume utilizator<input id="liUser" autocomplete="username" placeholder="ex: directoare"></label>
+      <label>Parola<input id="liPass" type="password" autocomplete="current-password" placeholder="••••••••"></label>
+      <button class="btn go big" id="doLogin" type="button">Intră în cont</button>
+    </div>
+    <div id="paneSignup" style="display:none">
+      <label>Nume utilizator<input id="suUser" autocomplete="username" placeholder="ex: directoare"></label>
+      <label>Parola (minim 4 caractere)<input id="suPass" type="password" autocomplete="new-password" placeholder="••••••••"></label>
+      <label>Repetă parola<input id="suPass2" type="password" autocomplete="new-password" placeholder="••••••••"></label>
+      <button class="btn gold big" id="doSignup" type="button">Creează contul</button>
+    </div>
+    <div class="lerr" id="lockErr"></div>
+    <p class="lhint">Conturile sunt salvate doar pe acest calculator. Clopoțelul pornit continuă să sune și când pagina e blocată.</p>
+  </div>
+</div>
+
+<div id="overlay">
+  <div class="ring">
+    <div class="emoji">🔔</div>
+    <div class="ttl" id="ovTime">--:--</div>
+    <div class="sub" id="ovLabel"></div>
+    <div class="schoolname">Școala Gimnazială Regina Maria</div>
+    <button class="btn stop" id="ovStop">Oprește sunetul</button>
+  </div>
+</div>
+
+<script>
+/* ====================== STARE ====================== */
+const LS_KEY = 'clopotel-regina-maria-v1';
+const state = {
+  running:false, bells:[], volume:0.8, sound:'bell',
+  schoolDaysOnly:true, customData:null, customName:'', customURL:null,
+  preset:{ start:'08:00', dur:45, count:7, mode:'full', breaks:[5,10,5,5,5,5] }
+};
+let seq=1;
+const uid=()=>'b'+Date.now().toString(36)+(seq++).toString(36);
+
+/* ====================== PERSISTENȚĂ ====================== */
+function save(){
+  try{
+    localStorage.setItem(LS_KEY, JSON.stringify({
+      bells:state.bells, volume:state.volume, sound:state.sound,
+      schoolDaysOnly:state.schoolDaysOnly,
+      customData:state.customData, customName:state.customName,
+      preset:state.preset
+    }));
+  }catch(e){}
+}
+function load(){
+  try{
+    let raw=localStorage.getItem(LS_KEY);
+    if(!raw){
+      const old=localStorage.getItem('clopotel-scolar-v1');
+      if(old){ localStorage.setItem(LS_KEY, old); raw=old; }
+      else return;
+    }
+    const d=JSON.parse(raw);
+    if(Array.isArray(d.bells)) state.bells=d.bells.map(b=>({id:b.id||uid(),time:b.time||'08:00',label:b.label||'',enabled:b.enabled!==false,fired:b.fired||null,custom:!!b.custom}));
+    if(typeof d.volume==='number') state.volume=d.volume;
+    if(d.sound) state.sound=d.sound;
+    if(typeof d.schoolDaysOnly==='boolean') state.schoolDaysOnly=d.schoolDaysOnly;
+    if(d.customName) state.customName=d.customName;
+    if(d.customData) state.customData=d.customData;
+    if(d.preset&&typeof d.preset==='object') Object.assign(state.preset,d.preset);
+  }catch(e){}
+}
+
+/* ====================== AUDIO ====================== */
+let ctx=null, masterGain=null;
+function audio(){
+  if(!ctx){
+    const AC=window.AudioContext||window.webkitAudioContext;
+    ctx=new AC(); masterGain=ctx.createGain();
+    masterGain.connect(ctx.destination); setVolume(state.volume);
+  }
+  if(ctx.state==='suspended') ctx.resume();
+  return ctx;
+}
+function setVolume(v){ state.volume=v; if(masterGain) masterGain.gain.value=Math.pow(v,1.7); }
+function strike(t0,base){
+  const c=audio();
+  const partials=[[1,1.0,2.2],[2.01,.55,1.6],[2.76,.35,1.1],[4.19,.2,.75],[5.43,.12,.5]];
+  for(const [ratio,amp,dur] of partials){
+    const o=c.createOscillator(),g=c.createGain();
+    o.type='sine'; o.frequency.value=base*ratio;
+    g.gain.setValueAtTime(0,t0);
+    g.gain.linearRampToValueAtTime(amp*0.5,t0+0.006);
+    g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+    o.connect(g).connect(masterGain); o.start(t0); o.stop(t0+dur+0.05);
+  }
+}
+function playBell(){
+  const c=audio(),t=c.currentTime+0.05,base=784;
+  [0,0.28,0.56,1.25,1.53,1.81,2.6,2.88,3.16].forEach(h=>strike(t+h,base));
+}
+function playElectric(dur=4.5){
+  const c=audio(),t0=c.currentTime+0.05;
+  const env=c.createGain();
+  env.gain.setValueAtTime(0,t0);
+  env.gain.linearRampToValueAtTime(0.9,t0+0.05);
+  env.gain.setValueAtTime(0.9,t0+dur-0.15);
+  env.gain.linearRampToValueAtTime(0,t0+dur);
+  env.connect(masterGain);
+  const am=c.createGain(); am.gain.value=0.34; am.connect(env);
+  const lfo=c.createOscillator(),depth=c.createGain();
+  lfo.type='square'; lfo.frequency.value=24; depth.gain.value=0.33;
+  lfo.connect(depth).connect(am.gain); lfo.start(t0); lfo.stop(t0+dur);
+  [640,1280,1920].forEach((f,i)=>{
+    const o=c.createOscillator(),g=c.createGain();
+    o.type=i===0?'square':'sawtooth'; o.frequency.value=f;
+    g.gain.value=[0.5,0.22,0.1][i];
+    o.connect(g).connect(am); o.start(t0); o.stop(t0+dur+0.05);
+  });
+}
+function note(freq,t0,dur,amp=0.5){
+  const c=audio();
+  for(const [r,a] of [[1,1],[2.01,.3],[3.02,.12]]){
+    const o=c.createOscillator(),g=c.createGain();
+    o.type='sine'; o.frequency.value=freq*r;
+    g.gain.setValueAtTime(0,t0);
+    g.gain.linearRampToValueAtTime(amp*a,t0+0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+    o.connect(g).connect(masterGain); o.start(t0); o.stop(t0+dur+0.05);
+  }
+}
+function playChime(){
+  const c=audio(),t=c.currentTime+0.05;
+  const seqN=[783.99,1046.5,1318.5,1568.0,1568.0,1318.5];
+  let at=t;
+  seqN.forEach((f,i)=>{ note(f,at,i===3?1.6:0.55,0.55); at+=i===3?0.45:0.3; });
+}
+let customAudioEl=null;
+function playChosen(){
+  if(state.sound==='custom'){
+    const src=state.customData||state.customURL||(customAudioEl&&customAudioEl.src);
+    if(src){
+      try{
+        const a=new Audio(src); a.volume=Math.min(1,Math.pow(state.volume,1.2));
+        customAudioEl=a; a.play().catch(()=>playBell());
+      }catch(e){playBell();}
+      return;
+    }
+    playBell(); return;
+  }
+  if(state.sound==='electric'){playElectric();return;}
+  if(state.sound==='chime'){playChime();return;}
+  playBell();
+}
+function stopSound(){
+  if(customAudioEl){try{customAudioEl.pause();customAudioEl.currentTime=0;}catch(e){}}
+  if(ctx&&masterGain){
+    try{masterGain.gain.setTargetAtTime(0,ctx.currentTime,0.03);}catch(e){}
+    setTimeout(()=>{if(masterGain) setVolume(state.volume);},250);
+  }
+}
+
+/* ====================== TIMP ====================== */
+const DAYS=['Duminică','Luni','Marți','Miercuri','Joi','Vineri','Sâmbătă'];
+const MONTHS=['ianuarie','februarie','martie','aprilie','mai','iunie','iulie','august','septembrie','octombrie','noiembrie','decembrie'];
+const pad=n=>String(n).padStart(2,'0');
+const toMin=t=>{const [h,m]=t.split(':').map(Number);return h*60+m;};
+function todayKey(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+function hms(ms){
+  if(ms<0)ms=0; const s=Math.floor(ms/1000);
+  return pad(Math.floor(s/3600))+':'+pad(Math.floor((s%3600)/60))+':'+pad(s%60);
+}
+function allowedDay(d){ if(!state.schoolDaysOnly) return true; const w=d.getDay(); return w>=1&&w<=5; }
+function nextBell(){
+  const now=new Date(); let best=null;
+  for(let off=0;off<9;off++){
+    const day=new Date(now.getFullYear(),now.getMonth(),now.getDate()+off);
+    if(!allowedDay(day)) continue;
+    for(const b of state.bells){
+      if(!b.enabled) continue;
+      const [h,m]=b.time.split(':').map(Number);
+      const dt=new Date(day.getFullYear(),day.getMonth(),day.getDate(),h,m,0,0);
+      if(dt.getTime()+60000<now.getTime()) continue;
+      if(!best||dt<best.dt) best={dt,bell:b};
+    }
+  }
+  return best;
+}
+
+/* ============ LANȚ ORE ↔ PAUZE ============ */
+const listEl=document.getElementById('list');
+function ensureBreaks(p){
+  const n=Math.max(1,Math.min(12,p.count||7));
+  if(!Array.isArray(p.breaks)) p.breaks=[];
+  if(p.breaks.length===0 && (p.small!==undefined||p.big!==undefined)){
+    const sm=(p.small===undefined?5:p.small), bg=(p.big===undefined?10:p.big), ba=(p.bigAfter===undefined?2:p.bigAfter);
+    for(let i=1;i<n;i++) p.breaks.push(i===ba?bg:sm);
+  }
+  while(p.breaks.length<n-1) p.breaks.push(p.breaks.length===1?10:5);
+  p.breaks.length=n-1;
+  p.breaks=p.breaks.map(v=>Math.max(0,Math.min(60,Number(v)||0)));
+  return p.breaks;
+}
+function ensureStarts(p){
+  const n=Math.max(1,Math.min(12,p.count||7));
+  if(!Array.isArray(p.starts)||!p.starts.length){
+    const [sh,sm]=String(p.start||'08:00').split(':').map(Number);
+    let t=(sh||0)*60+(sm||0);
+    p.starts=[];
+    for(let i=1;i<=n;i++){ p.starts.push(t); if(i<n) t=t+(p.dur||45)+(p.breaks[i-1]||0); }
+  }
+  while(p.starts.length<n){
+    const j=p.starts.length-1;
+    p.starts.push(p.starts[j]+(p.dur||45)+(p.breaks[j]||0));
+  }
+  p.starts.length=n;
+  p.starts=p.starts.map(v=>Math.max(0,Math.round(Number(v)||0)));
+  return p.starts;
+}
+function rechainFrom(p,k){
+  ensureBreaks(p); ensureStarts(p);
+  for(let j=k;j<p.count-1;j++) p.starts[j+1]=p.starts[j]+p.dur+(p.breaks[j]||0);
+  p.start=fmtMin(p.starts[0]);
+}
+function chainMins(){
+  const p=state.preset; ensureBreaks(p); ensureStarts(p);
+  const out=[];
+  for(let i=1;i<=p.count;i++){
+    const s=p.starts[i-1],e=s+p.dur;
+    out.push({i,s,e,brk:(i<p.count?(p.breaks[i-1]||0):0)});
+  }
+  return out;
+}
+function rebuildBells(){
+  const p=state.preset;
+  const rows=[];
+  for(const q of chainMins()){
+    if(p.mode==='starts') rows.push({time:fmtMin(q.s),label:'Ora '+q.i+' — intrare'});
+    else{rows.push({time:fmtMin(q.s),label:'Ora '+q.i+' — intrare'});rows.push({time:fmtMin(q.e),label:'Ora '+q.i+' — ieșire'});}
+  }
+  const extra=state.bells.filter(b=>b.custom);
+  state.bells=rows.map(r=>({id:uid(),time:r.time,label:r.label,enabled:true,fired:null})).concat(extra);
+}
+function escapeAttr(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function renderList(){
+  listEl.innerHTML='';
+  const chain=chainMins();
+  const nowMin=new Date().getHours()*60+new Date().getMinutes();
+  chain.forEach((q,idx)=>{
+    const isNow=nowMin>=q.s&&nowMin<q.e;
+    const d=document.createElement('div');
+    d.className='lesson'+(isNow?' is-now':'');
+    let head;
+    if(idx===0){
+      head='<span class="lnum">'+q.i+'</span><b>Ora '+q.i+'</b><input type="time" class="lstart" data-i="1" value="'+fmtMin(q.s)+'" title="Mută prima oră — toate celelalte urmează după ea"><span class="ldur">'+state.preset.dur+' min</span>';
+    }else{
+      head='<span class="lnum">'+q.i+'</span><b>Ora '+q.i+'</b><span class="ltime">'+fmtMin(q.s)+' → '+fmtMin(q.e)+'</span><span class="ldur">'+state.preset.dur+' min</span>';
+    }
+    head+='<span class="sp"></span><span class="ntag">● Următorul</span><button class="ico play" data-i="'+q.i+'" title="Probează sunetul">🔊</button>';
+    if(state.preset.count>1) head+='<button class="ico delles" data-i="'+q.i+'" title="Șterge Ora '+q.i+'">✕</button>';
+    d.innerHTML='<div class="lhead">'+head+'</div>';
+    if(idx<chain.length-1){
+      const nextS=chain[idx+1].s;
+      const row=document.createElement('div');
+      row.className='lbreak';
+      row.innerHTML='<span>⏸ Pauză după Ora '+q.i+':</span>';
+      const inp=document.createElement('input');
+      inp.type='number'; inp.min='0'; inp.max='60'; inp.value=q.brk;
+      inp.className='b-inp'; inp.dataset.i=String(q.i);
+      inp.title='Cât de lungă e pauza după Ora '+q.i+' (minute)';
+      inp.addEventListener('change',()=>{
+        state.preset.breaks[q.i-1]=Math.max(0,Math.min(60,Number(inp.value)||0));
+        rechainFrom(state.preset,q.i-1);
+        save(); rebuildBells(); renderList(); syncGenInputs(); tick();
+      });
+      row.appendChild(inp);
+      const em=document.createElement('em');
+      em.textContent='min → sună din nou la '+fmtMin(nextS);
+      row.appendChild(em);
+      d.appendChild(row);
+    }else{
+      const end=document.createElement('div');
+      end.className='lbreak';
+      end.innerHTML='<em>🏁 Ultima oră — programul se termină la '+fmtMin(q.e)+'</em>';
+      d.appendChild(end);
+    }
+    listEl.appendChild(d);
+  });
+  state.bells.filter(b=>b.custom).forEach(b=>{
+    const x=document.createElement('div');
+    x.className='extra'; x.dataset.id=b.id;
+    x.innerHTML='<span style="font-weight:800">＋</span>';
+    const ti=document.createElement('input');
+    ti.type='time'; ti.value=b.time; ti.className='x-time';
+    ti.addEventListener('change',()=>{b.time=ti.value;b.fired=null;save();tick();});
+    const tx=document.createElement('input');
+    tx.type='text'; tx.value=b.label||''; tx.placeholder='Nume'; tx.className='x-label';
+    tx.addEventListener('input',()=>{b.label=tx.value;save();});
+    const del=document.createElement('button');
+    del.textContent='✕'; del.title='Șterge';
+    del.onclick=()=>{state.bells=state.bells.filter(y=>y.id!==b.id);save();renderList();tick();};
+    x.appendChild(ti); x.appendChild(tx); x.appendChild(del);
+    listEl.appendChild(x);
+  });
+}
+listEl.addEventListener('change',e=>{
+  if(e.target.classList.contains('lstart')){
+    const p=state.preset; ensureBreaks(p); ensureStarts(p);
+    p.starts[0]=toMin(e.target.value||'08:00');
+    rechainFrom(p,0);
+    save(); syncGenInputs(); rebuildBells(); renderList(); tick();
+  }
+});
+listEl.addEventListener('click',e=>{
+  if(e.target.classList.contains('play')){audio();playChosen();}
+  const del=e.target.closest?e.target.closest('.delles'):null;
+  if(del) deleteLesson(Number(del.dataset.i));
+});
+
+/* ============ GENERATOR / SETĂRI ============ */
+const newTime=document.getElementById('newTime'), newLabel=document.getElementById('newLabel');
+function addBell(time,label){
+  const t=time||newTime.value||'08:00';
+  state.bells.push({id:uid(),time:t,label:label||newLabel.value.trim()||('Clopoțel '+t),enabled:true,fired:null,custom:true});
+  newLabel.value=''; renderList(); save(); tick();
+}
+document.getElementById('addBtn').onclick=()=>addBell();
+newLabel.addEventListener('keydown',e=>{if(e.key==='Enter')addBell();});
+
+const gStart=document.getElementById('gStart'),gDur=document.getElementById('gDur'),
+      gCount=document.getElementById('gCount'),gMode=document.getElementById('gMode');
+const num=(el,def)=>{const v=Number(el.value);return isFinite(v)?v:def;};
+function fmtMin(mins){const t=((Math.round(mins)%1440)+1440)%1440;return pad(Math.floor(t/60))+':'+pad(t%60);}
+function shiftMin(str,delta){
+  const [h,m]=String(str||'08:00').split(':').map(Number);
+  return fmtMin((h||0)*60+(m||0)+delta);
+}
+function syncGenInputs(){
+  gStart.value=state.preset.start; gDur.value=state.preset.dur;
+  gCount.value=state.preset.count; gMode.value=state.preset.mode;
+}
+function readPresetInputs(){
+  const ns=gStart.value||'08:00';
+  let d=num(gDur,45);
+  if(d<=15) d=45;
+  state.preset.dur=Math.max(20,Math.min(90,d));
+  state.preset.count=Math.max(1,Math.min(12,num(gCount,7)));
+  state.preset.mode=gMode.value==='starts'?'starts':'full';
+  ensureBreaks(state.preset); ensureStarts(state.preset);
+  const nsMin=toMin(ns);
+  if(nsMin!==state.preset.starts[0]){ state.preset.starts[0]=nsMin; rechainFrom(state.preset,0); }
+  state.preset.start=fmtMin(state.preset.starts[0]);
+  save();
+  const w=document.getElementById('durWarn');
+  if(w) w.style.display='none';
+}
+function buildRows(p){
+  ensureBreaks(p); ensureStarts(p);
+  const rows=[];
+  for(let i=1;i<=p.count;i++){
+    const s=p.starts[i-1],e=s+p.dur;
+    if(p.mode==='starts') rows.push([s,'Ora '+i+' — intrare']);
+    else{rows.push([s,'Ora '+i+' — intrare']);rows.push([e,'Ora '+i+' — ieșire']);}
+  }
+  return rows;
+}
+function initPresetUI(){
+  const p=state.preset;
+  if((Number(p.dur)||0)<=15) p.dur=45;
+  ensureBreaks(p); ensureStarts(p);
+  syncGenInputs(); readPresetInputs();
+  if(!state.bells.length || !state.bells.some(b=>!b.custom)) rebuildBells();
+  renderList();
+}
+function generateSchedule(){
+  readPresetInputs();
+  rebuildBells();
+  renderList();save();tick();
+  const b=state.preset.breaks;
+  alert('Gata! Orarul e pus.\nOrdinea: intrare → după '+state.preset.dur+' min sună de ieșire → după pauză ('+(b.join(', ')||'—')+' min) sună de intrare… și tot așa.');
+}
+function addHour(){
+  readPresetInputs();
+  if(state.preset.count>=12){ alert('Maxim 12 ore pe zi.'); return; }
+  state.preset.count++;
+  ensureBreaks(state.preset); ensureStarts(state.preset);
+  save(); syncGenInputs(); rebuildBells(); renderList(); tick();
+}
+function deleteLesson(i){
+  readPresetInputs();
+  if(state.preset.count<=1) return;
+  if(!confirm('Șterg Ora '+i+'? Orele de după ea se mută mai devreme, singure.')) return;
+  const p=state.preset;
+  if(i<p.count) p.breaks.splice(i-1,1);
+  else p.breaks.pop();
+  p.starts.splice(i-1,1);
+  p.count--;
+  if(i===1) p.starts[0]=toMin(p.start);
+  ensureBreaks(p); ensureStarts(p);
+  rechainFrom(p,i===1?0:i-1);
+  save(); syncGenInputs(); rebuildBells(); renderList(); tick();
+}
+['change'].forEach(ev=>{
+  gStart.addEventListener(ev,()=>{readPresetInputs();rebuildBells();renderList();tick();});
+  gDur.addEventListener(ev,()=>{readPresetInputs();rechainFrom(state.preset,0);save();rebuildBells();renderList();syncGenInputs();tick();});
+  gMode.addEventListener(ev,()=>{readPresetInputs();rebuildBells();renderList();tick();});
+});
+gCount.addEventListener('change',()=>{readPresetInputs();rebuildBells();renderList();syncGenInputs();tick();});
+document.getElementById('startMinus').onclick=()=>{gStart.value=shiftMin(gStart.value,-5);readPresetInputs();rebuildBells();renderList();tick();};
+document.getElementById('startPlus').onclick=()=>{gStart.value=shiftMin(gStart.value,5);readPresetInputs();rebuildBells();renderList();tick();};
+document.getElementById('genBtn').onclick=generateSchedule;
+document.getElementById('addHourBtn').onclick=addHour;
+document.getElementById('clearBtn').onclick=()=>{
+  const extra=state.bells.filter(b=>b.custom);
+  if(extra.length&&!confirm('Șterg cele '+extra.length+' clopoțele manuale în plus?')) return;
+  if(!extra.length){ alert('Orarul de bază rămâne — el se face din pauzele de mai sus. Schimbă pauzele sau numărul de ore dacă vrei alt program.'); return; }
+  state.bells=state.bells.filter(b=>!b.custom);save();renderList();tick();
+};
+
+/* ====================== CONTROALE ====================== */
+const startBtn=document.getElementById('startBtn'),statusEl=document.getElementById('status'),
+      statusTxt=document.getElementById('statusTxt'),soundSel=document.getElementById('sound'),
+      volEl=document.getElementById('vol'),volTxt=document.getElementById('volTxt'),
+      fileRow=document.getElementById('fileRow'),fileEl=document.getElementById('file'),
+      fileNameEl=document.getElementById('fileName'),schoolDaysEl=document.getElementById('schoolDays');
+let wakeLock=null;
+startBtn.onclick=async()=>{
+  audio();
+  state.running=!state.running; applyRunningUI();
+  if(state.running){requestWakeLock();tick();}
+  else{releaseWakeLock();hideOverlay();}
+};
+function applyRunningUI(){
+  const w=document.getElementById('runWarn');
+  if(state.running){
+    startBtn.textContent='⏸ OPREȘTE CLOPOȚELUL';startBtn.classList.remove('go');startBtn.classList.add('stop');
+    statusEl.classList.add('on');statusTxt.textContent='Pornit — sună singur';
+    if(w) w.classList.add('hide');
+  }else{
+    startBtn.textContent='▶ PORNEȘTE CLOPOȚELUL';startBtn.classList.remove('stop');startBtn.classList.add('go');
+    statusEl.classList.remove('on');statusTxt.textContent='Oprit';
+    if(w) w.classList.remove('hide');
+  }
+}
+document.getElementById('testBtn').onclick=()=>{audio();playChosen();};
+soundSel.addEventListener('change',()=>{state.sound=soundSel.value;fileRow.style.display=state.sound==='custom'?'block':'none';save();});
+fileEl.addEventListener('change',()=>{
+  const f=fileEl.files&&fileEl.files[0]; if(!f) return;
+  state.customName=f.name; fileNameEl.textContent=f.name;
+  if(f.size<=1500000){const r=new FileReader();r.onload=()=>{state.customData=r.result;state.customURL=null;save();};r.readAsDataURL(f);}
+  else{state.customData=null;state.customURL=URL.createObjectURL(f);fileNameEl.textContent=f.name+' (mare — se pierde la închidere)';}
+});
+volEl.addEventListener('input',()=>{setVolume(Number(volEl.value)/100);volTxt.textContent=volEl.value+'%';save();});
+schoolDaysEl.addEventListener('change',()=>{state.schoolDaysOnly=schoolDaysEl.checked;save();tick();});
+async function requestWakeLock(){try{if('wakeLock' in navigator) wakeLock=await navigator.wakeLock.request('screen');}catch(e){}}
+function releaseWakeLock(){try{if(wakeLock) wakeLock.release();}catch(e){}wakeLock=null;}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&state.running){requestWakeLock();tick();}});
+
+/* ====================== OVERLAY ====================== */
+const overlay=document.getElementById('overlay'),ovTime=document.getElementById('ovTime'),ovLabel=document.getElementById('ovLabel');
+document.getElementById('ovStop').onclick=()=>{stopSound();hideOverlay();};
+let ovTimer=null;
+function showOverlay(bell){
+  overlay.classList.add('on'); ovTime.textContent=bell.time; ovLabel.textContent=bell.label||'Clopoțel';
+  document.title='🔔 '+bell.time+' — '+(bell.label||'Clopoțel'); clearTimeout(ovTimer);
+  ovTimer=setTimeout(()=>hideOverlay(),9000);
+}
+function hideOverlay(){overlay.classList.remove('on');document.title='Clopoțel — Școala Regina Maria';}
+
+/* ====================== FAZA LIVE + LOOP ====================== */
+const clockEl=document.getElementById('clock'),dateEl=document.getElementById('date'),
+      cdEl=document.getElementById('countdown'),nextInfoEl=document.getElementById('nextInfo'),
+      phaseBox=document.getElementById('phaseBox'),phaseName=document.getElementById('phaseName'),
+      phaseSub=document.getElementById('phaseSub'),phaseBar=document.getElementById('phaseBar');
+let lastMinuteKey='';
+function mmss(ms){ if(ms<0)ms=0; const s=Math.ceil(ms/1000); return pad(Math.floor(s/60))+':'+pad(s%60); }
+function todayPeriods(){
+  const p=state.preset, now=new Date();
+  ensureBreaks(p); ensureStarts(p);
+  const pers=[];
+  for(let i=1;i<=p.count;i++){
+    const s=p.starts[i-1],e=s+p.dur;
+    pers.push({i,
+      s:new Date(now.getFullYear(),now.getMonth(),now.getDate(),Math.floor(s/60),s%60,0,0),
+      e:new Date(now.getFullYear(),now.getMonth(),now.getDate(),Math.floor(e/60),e%60,0,0),
+      brk:(i<p.count?(p.breaks[i-1]||0):0)});
+  }
+  return pers;
+}
+function updatePhase(now){
+  const pers=todayPeriods();
+  if(!pers.length||!allowedDay(now)){
+    phaseBox.classList.add('idle');
+    phaseName.textContent=!allowedDay(now)?'Astăzi nu sună (weekend)':'Fără program azi';
+    phaseSub.textContent=''; return;
+  }
+  const t=now.getTime();
+  if(t<pers[0].s.getTime()){
+    phaseBox.classList.add('idle');
+    phaseName.textContent='⏳ Începe la '+fmtMin(state.preset.starts[0])+' — Ora 1';
+    phaseSub.textContent='Programul pornește singur. Lăsați pagina deschisă.';
+    return;
+  }
+  for(const q of pers){
+    if(t>=q.s.getTime()&&t<q.e.getTime()){
+      const total=q.e-q.s, left=q.e-t, done=100*(1-left/total);
+      phaseBox.classList.remove('idle');
+      phaseName.textContent='📖 ORA '+q.i+' — mai sunt '+mmss(left);
+      phaseSub.textContent='Sună de ieșire la '+pad(q.e.getHours())+':'+pad(q.e.getMinutes())+' → apoi pauză '+q.brk+' min';
+      phaseBar.style.width=done.toFixed(1)+'%';
+      return;
+    }
+    const nx=pers[q.i];
+    if(nx&&t>=q.e.getTime()&&t<nx.s.getTime()){
+      const total=nx.s-q.e, left=nx.s-t, done=100*(1-left/total);
+      phaseBox.classList.remove('idle');
+      phaseName.textContent='⏸ PAUZĂ '+q.brk+' min — mai sunt '+mmss(left);
+      phaseSub.textContent='Sună de intrare la '+pad(nx.s.getHours())+':'+pad(nx.s.getMinutes())+' → începe Ora '+nx.i;
+      phaseBar.style.width=done.toFixed(1)+'%';
+      return;
+    }
+  }
+  phaseBox.classList.add('idle');
+  const first=pers[0].s;
+  const firstT=pad(first.getHours())+':'+pad(first.getMinutes());
+  phaseName.textContent='✅ Program terminat azi';
+  phaseSub.textContent='O luăm de la capăt mâine la '+firstT+' (Ora 1) — lăsați pagina deschisă și butonul pornit.';
+}
+function tick(){
+  const now=new Date();
+  clockEl.innerHTML=pad(now.getHours())+':'+pad(now.getMinutes())+'<small>:'+pad(now.getSeconds())+'</small>';
+  dateEl.textContent=DAYS[now.getDay()]+', '+now.getDate()+' '+MONTHS[now.getMonth()]+' '+now.getFullYear();
+  updatePhase(now);
+  const nb=nextBell();
+  if(nb){
+    cdEl.textContent=hms(nb.dt.getTime()-now.getTime());
+    const dd=nb.dt.getDate()===now.getDate()?'':' ('+DAYS[nb.dt.getDay()]+')';
+    nextInfoEl.textContent=nb.bell.time+' · '+(nb.bell.label||'Clopoțel')+dd;
+  }else{
+    cdEl.textContent='--:--:--';
+    nextInfoEl.textContent=state.bells.length?'Niciun clopoțel în perioada următoare.':'Apasă „Pune orarul” mai jos.';
+  }
+  const chain=chainMins();
+  listEl.querySelectorAll('.lesson').forEach((el,idx)=>{
+    const q=chain[idx]; if(!q) return;
+    const hit=nb&&(nb.bell.time===fmtMin(q.s)||nb.bell.time===fmtMin(q.e));
+    el.classList.toggle('is-next',!!hit);
+  });
+  const minuteKey=todayKey(now)+' '+pad(now.getHours())+':'+pad(now.getMinutes());
+  if(state.running&&minuteKey!==lastMinuteKey){
+    lastMinuteKey=minuteKey;
+    const nowMin=now.getHours()*60+now.getMinutes();
+    for(const b of state.bells){
+      if(!b.enabled) continue; if(!allowedDay(now)) continue;
+      if(toMin(b.time)!==nowMin) continue;
+      const stamp=todayKey(now)+' '+b.time;
+      if(b.fired===stamp) continue;
+      b.fired=stamp; save(); ring(b); break;
+    }
+  }
+  if(minuteKey!==lastMinuteKey) lastMinuteKey=minuteKey;
+}
+function ring(bell){
+  audio();playChosen();showOverlay(bell);
+  try{
+    const lr=document.getElementById('lastRing');
+    if(lr) lr.innerHTML='Ultimul: <b>✓ '+bell.time+'</b> — '+escapeAttr(bell.label||'Clopoțel');
+  }catch(e){}
+}
+
+/* ================= CONTURI (pe acest calculator) ================= */
+const USERS_KEY='clopotel-reginamaria-users-v1', SES_KEY='clopotel-reginamaria-session-v1';
+const lockEl=document.getElementById('lock'), lockErr=document.getElementById('lockErr'),
+      tabLogin=document.getElementById('tabLogin'), tabSignup=document.getElementById('tabSignup'),
+      paneLogin=document.getElementById('paneLogin'), paneSignup=document.getElementById('paneSignup'),
+      userChip=document.getElementById('userChip');
+function getUsers(){ try{ const u=JSON.parse(localStorage.getItem(USERS_KEY)); return Array.isArray(u)?u:[]; }catch(e){ return []; } }
+function setUsers(u){ localStorage.setItem(USERS_KEY,JSON.stringify(u)); }
+function rndHex(n){
+  const a=new Uint8Array(n);
+  if(window.crypto&&crypto.getRandomValues) crypto.getRandomValues(a);
+  else for(let i=0;i<n;i++) a[i]=Math.floor(Math.random()*256);
+  return [...a].map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+async function hashPw(salt,pw){
+  const msg=salt+'::'+pw;
+  try{
+    if(window.crypto&&crypto.subtle){
+      const d=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(msg));
+      return [...new Uint8Array(d)].map(x=>x.toString(16).padStart(2,'0')).join('');
+    }
+  }catch(e){}
+  let h1=0x811c9dc5,h2=0x01000193;
+  for(let i=0;i<msg.length;i++){ h1=Math.imul(h1^msg.charCodeAt(i),16777619)>>>0; h2=Math.imul(h2+msg.charCodeAt(i),31)>>>0; }
+  return 'f'+h1.toString(16)+h2.toString(16);
+}
+function lockError(m){ lockErr.textContent=m||''; lockErr.classList.toggle('show',!!m); }
+function showLock(mode){
+  const users=getUsers();
+  if(!users.length) mode='signup';
+  tabLogin.classList.toggle('on',mode==='login');
+  tabSignup.classList.toggle('on',mode==='signup');
+  paneLogin.style.display=mode==='login'?'block':'none';
+  paneSignup.style.display=mode==='signup'?'block':'none';
+  lockError(!users.length?'Prima oară: creează contul (ex: directoare).':'');
+  lockEl.classList.remove('hide');
+  setTimeout(()=>{ const f=mode==='login'?document.getElementById('liUser'):document.getElementById('suUser'); if(f) f.focus(); },50);
+}
+function refreshUserChip(){
+  const s=localStorage.getItem(SES_KEY);
+  userChip.textContent=s?('👤 '+s):'';
+}
+tabLogin.onclick=()=>showLock('login');
+tabSignup.onclick=()=>showLock('signup');
+document.getElementById('doLogin').onclick=async()=>{
+  const u=document.getElementById('liUser').value.trim();
+  const p=document.getElementById('liPass').value;
+  const acc=getUsers().find(x=>x.u.toLowerCase()===u.toLowerCase());
+  if(!u||!p){ lockError('Scrie numele și parola.'); return; }
+  if(!acc){ lockError('Nu există acest cont pe acest calculator.'); return; }
+  if(await hashPw(acc.salt,p)!==acc.hash){ lockError('Parolă greșită.'); return; }
+  localStorage.setItem(SES_KEY,acc.u);
+  document.getElementById('liPass').value='';
+  lockError(''); lockEl.classList.add('hide'); refreshUserChip();
+};
+document.getElementById('doSignup').onclick=async()=>{
+  const u=document.getElementById('suUser').value.trim();
+  const p1=document.getElementById('suPass').value, p2=document.getElementById('suPass2').value;
+  if(u.length<2){ lockError('Alege un nume de cel puțin 2 litere.'); return; }
+  if(p1.length<4){ lockError('Parola trebuie să aibă minim 4 caractere.'); return; }
+  if(p1!==p2){ lockError('Parolele nu sunt la fel.'); return; }
+  const users=getUsers();
+  if(users.some(x=>x.u.toLowerCase()===u.toLowerCase())){ lockError('Există deja un cont cu acest nume.'); return; }
+  const salt=rndHex(16);
+  users.push({u:u,salt:salt,hash:await hashPw(salt,p1),created:Date.now()});
+  setUsers(users);
+  localStorage.setItem(SES_KEY,u);
+  document.getElementById('suPass').value=''; document.getElementById('suPass2').value='';
+  lockError(''); lockEl.classList.add('hide'); refreshUserChip();
+};
+[['liUser','liPass','doLogin'],['suUser','suPass2','doSignup']].forEach(([a,b,btn])=>{
+  [a,b].forEach(id=>document.getElementById(id).addEventListener('keydown',e=>{
+    if(e.key==='Enter') document.getElementById(btn).click();
+  }));
+});
+document.getElementById('logoutBtn').onclick=()=>{ localStorage.removeItem(SES_KEY); refreshUserChip(); showLock(getUsers().length?'login':'signup'); };
+(function gate(){
+  const users=getUsers(), ses=localStorage.getItem(SES_KEY);
+  if(ses&&users.some(x=>x.u===ses)) lockEl.classList.add('hide');
+  else showLock(users.length?'login':'signup');
+  refreshUserChip();
+})();
+
+/* ====================== INIT ====================== */
+load(); initPresetUI();
+soundSel.value=state.sound; fileRow.style.display=state.sound==='custom'?'block':'none';
+if(state.customName) fileNameEl.textContent=state.customName;
+volEl.value=Math.round(state.volume*100); volTxt.textContent=volEl.value+'%';
+schoolDaysEl.checked=state.schoolDaysOnly;
+renderList(); applyRunningUI(); tick(); setInterval(tick,250);
+</script>
+</body>
+</html>
